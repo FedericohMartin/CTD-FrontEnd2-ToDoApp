@@ -1,5 +1,5 @@
 window.addEventListener('load', function () {
-    /* ---------------------- obtenemos variables globales ---------------------- */
+    /* ---------------------- Global variables ---------------------- */
     const form = document.forms[0];
     const nombre = document.querySelector('#inputNombre');
     const apellido = document.querySelector('#inputApellido');
@@ -8,18 +8,18 @@ window.addEventListener('load', function () {
     const url = 'https://ctd-fe2-todo.herokuapp.com/v1';
 
     /* -------------------------------------------------------------------------- */
-    /*            FUNCIÓN 1: Escuchamos el submit y preparamos el envío           */
+    /*            FUNCTION 1: Submit listener & Request settings                  */
     /* -------------------------------------------------------------------------- */
     form.addEventListener('submit', function (event) {
         event.preventDefault();
-        //creamos el cuerpo de la request
+        //Request Body
         const payload = {
             firstName: nombre.value,
             lastName: apellido.value, 
             email: email.value,
             password: password.value
         };
-        //configuramos la request del Fetch
+        //Fetch request configuration
         const settings = {
             method: 'POST',
             body: JSON.stringify(payload),
@@ -27,15 +27,15 @@ window.addEventListener('load', function () {
                 'Content-Type': 'application/json'
             }
         };
-        //lanzamos la consulta de login a la API
+        //Send login to API
         realizarRegister(settings);
 
-        //limpio los campos del formulario
+        //Clean form
         form.reset();
     });
 
     /* -------------------------------------------------------------------------- */
-    /*                    FUNCIÓN 2: Realizar el signup [POST]                    */
+    /*                    FUNCIÓN 2: Signup [POST]                                */
     /* -------------------------------------------------------------------------- */
     function realizarRegister(settings) {
         console.log("Lanzando la consulta a la API");
@@ -55,10 +55,10 @@ window.addEventListener('load', function () {
                 console.log(data);
 
                 if (data.jwt) {
-                    //guardo en LocalStorage el objeto con el token
+                    //Store object with token in LocalStorage
                     localStorage.setItem('jwt', JSON.stringify(data.jwt));
 
-                    //redireccionamos a la página
+                    //Redirection
                     location.replace('./mis-tareas.html');
                 }
                 

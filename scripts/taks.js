@@ -1,10 +1,9 @@
-// SEGURIDAD: Si no se encuentra en localStorage info del usuario
-// no lo deja acceder a la página, redirigiendo al login inmediatamente.
+// SECURITY: If it's not user info on localStorage, denegate access and redirect to login.
 if (!localStorage.jwt) {
   location.replace('./index.html');
 }
 
-/* ------ comienzan las funcionalidades una vez que carga el documento ------ */
+/* ------ First load document, then functionalities ------ */
 window.addEventListener('load', function () {
   /* ------------------------- iniciamos libreria AOS ------------------------- */
   AOS.init();
@@ -22,16 +21,11 @@ window.addEventListener('load', function () {
 
 
   /* -------------------------------------------------------------------------- */
-  /*                          FUNCIÓN 1 - Cerrar sesión                         */
+  /*                          FUNCTION 1 - Close session                        */
   /* -------------------------------------------------------------------------- */
 
   btnCerrarSesion.addEventListener('click', function () {
-    // const cerrarSesion = confirm("¿Desea cerrar sesión?");
-    // if (cerrarSesion) {
-    //   //limpiamos el localstorage y redireccioamos a login
-    //   localStorage.clear();
-    //   location.replace('./index.html');
-    // }
+
     Swal.fire({
       title: '¿Desea cerrar sesión?',
       icon: 'info',
@@ -55,7 +49,7 @@ window.addEventListener('load', function () {
   });
 
   /* -------------------------------------------------------------------------- */
-  /*                 FUNCIÓN 2 - Obtener nombre de usuario [GET]                */
+  /*                 FUNCTION 2 - Get user name  [GET]                          */
   /* -------------------------------------------------------------------------- */
 
   function obtenerNombreUsuario() {
@@ -79,7 +73,7 @@ window.addEventListener('load', function () {
 
 
   /* -------------------------------------------------------------------------- */
-  /*                 FUNCIÓN 3 - Obtener listado de tareas [GET]                */
+  /*                 FUNCTION 3 - Get tasks list   [GET]                        */
   /* -------------------------------------------------------------------------- */
 
   function consultarTareas() {
@@ -105,7 +99,7 @@ window.addEventListener('load', function () {
 
 
   /* -------------------------------------------------------------------------- */
-  /*                    FUNCIÓN 4 - Crear nueva tarea [POST]                    */
+  /*                    FUNCTION 4 - Create new task [POST]                     */
   /* -------------------------------------------------------------------------- */
 
   formCrearTarea.addEventListener('submit', function (event) {
@@ -134,34 +128,34 @@ window.addEventListener('load', function () {
       .catch(error => console.log(error));
 
 
-    //limpiamos el form
+    //Clean form
     formCrearTarea.reset();
   })
 
 
   /* -------------------------------------------------------------------------- */
-  /*                  FUNCIÓN 5 - Renderizar tareas en pantalla                 */
+  /*                  FUNCTION 5 - Renderize tasks                              */
   /* -------------------------------------------------------------------------- */
   function renderizarTareas(listado) {
 
-    // obtengo listados y limpio cualquier contenido interno
+    // Get lists and clean content
     const tareasPendientes = document.querySelector('.tareas-pendientes');
     const tareasTerminadas = document.querySelector('.tareas-terminadas');
     tareasPendientes.innerHTML = "";
     tareasTerminadas.innerHTML = "";
 
-    // buscamos el numero de finalizadas
+    // Get finished tasks quantity
     const numeroFinalizadas = document.querySelector('#cantidad-finalizadas');
     let contador = 0;
     numeroFinalizadas.innerText = contador;
 
     listado.forEach(tarea => {
-      //variable intermedia para manipular la fecha
+      //Aux variable for date
       let fecha = new Date(tarea.createdAt);
 
       if (tarea.completed) {
         contador++;
-        //lo mandamos al listado de tareas completas
+        //Add to finished tasks
         tareasTerminadas.innerHTML += `
           <li class="tarea" data-aos="fade-up">
             <div class="hecha">
@@ -177,7 +171,7 @@ window.addEventListener('load', function () {
           </li>
                         `
       } else {
-        //lo mandamos al listado de tareas sin terminar
+        //Add to unfinished tasks
         tareasPendientes.innerHTML += `
           <li class="tarea" data-aos="fade-down">
             <button class="change" id="${tarea.id}"><i class="fa-regular fa-circle"></i></button>
@@ -188,13 +182,13 @@ window.addEventListener('load', function () {
           </li>
                         `
       }
-      // actualizamos el contador en la pantalla
+      //Refresh counter
       numeroFinalizadas.innerText = contador;
     })
   }
 
   /* -------------------------------------------------------------------------- */
-  /*                  FUNCIÓN 6 - Cambiar estado de tarea [PUT]                 */
+  /*                  FUNCTION 6 - Change task status  [PUT]                    */
   /* -------------------------------------------------------------------------- */
   function botonesCambioEstado() {
     const btnCambioEstado = document.querySelectorAll('.change');

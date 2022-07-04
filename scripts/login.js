@@ -1,5 +1,5 @@
 window.addEventListener('load', function () {
-    /* ---------------------- obtenemos variables globales ---------------------- */
+    /* ---------------------- Global variables ---------------------- */
     const form = document.forms[0];
     const email = document.querySelector('#inputEmail')
     const password = document.querySelector('#inputPassword')
@@ -7,17 +7,17 @@ window.addEventListener('load', function () {
 
 
     /* -------------------------------------------------------------------------- */
-    /*            FUNCIÓN 1: Escuchamos el submit y preparamos el envío           */
+    /*            FUNCTION 1: Submit listener & Request settings                  */
     /* -------------------------------------------------------------------------- */
     form.addEventListener('submit', function (event) {
         event.preventDefault();
 
-        //creamos el cuerpo de la request
+        //Request body
         const payload = {
             email: email.value,
             password: password.value
         };
-        //configuramos la request del Fetch
+        //Fetch request configuration
         const settings = {
             method: 'POST',
             body: JSON.stringify(payload),
@@ -25,16 +25,16 @@ window.addEventListener('load', function () {
                 'Content-Type': 'application/json'
             }
         };
-        //lanzamos la consulta de login a la API
+        //Send login to API
         realizarLogin(settings);
 
-        //limpio los campos del formulario
+        //Clean form
         form.reset();
     });
 
 
     /* -------------------------------------------------------------------------- */
-    /*                     FUNCIÓN 2: Realizar el login [POST]                    */
+    /*                     FUNCTION 2: Login [POST]                               */
     /* -------------------------------------------------------------------------- */
     function realizarLogin(settings) {
         console.log("Lanzando la consulta a la API...");
@@ -54,10 +54,10 @@ window.addEventListener('load', function () {
                 console.log(data);
 
                 if (data.jwt) {
-                    //guardo en LocalStorage el objeto con el token
+                    //Store object with token in LocalStorage
                     localStorage.setItem('jwt', JSON.stringify(data.jwt));
 
-                    //redireccionamos a la página
+                    //Redirection
                     location.replace('./mis-tareas.html');
                 }
             }).catch(err => {
