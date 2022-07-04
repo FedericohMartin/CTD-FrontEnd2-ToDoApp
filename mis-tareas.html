@@ -9,15 +9,15 @@
   <link rel="icon" type="image/x-icon" href="./assets/DH_Logo_Black.png">
   <meta name="description" content="Digital House CTD | Proyecto integrador | FRONTEND II" />
 
-  <!-- ----------------------------- estilos CSS ----------------------------- -->
+  <!-- ----------------------------- Styles CSS ----------------------------- -->
   <link rel="stylesheet" href="./css/tasksStyles.css">
 
-  <!-- ------------------- libreria de iconos Fontawesome -------------------- -->
+  <!-- ---------------------------- Fontawesome ----------------------------- -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <!-- ------------------------------ librerias ------------------------------ -->
+  <!-- ------------------------------ Libraries ------------------------------ -->
   <!-- Sweet Alert -->
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- Animate on scroll -->
@@ -25,14 +25,14 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 
-  <!-- ------------------------- logica de la página ------------------------- -->
+  <!-- ------------------------- Logic ------------------------- -->
   <script src="./scripts/taks.js"></script>
 
 </head>
 
 <body>
 
-  <!-- cabecera con barra de navegación -->
+  <!-- Header & NavBar -->
   <header class="container">
     <nav>
       <h1>To-Do App</h1>
@@ -46,19 +46,19 @@
   </header>
 
   <main class="container">
-    <!-- carga de tareas -->
+    <!-- Add Tasks -->
     <form class="nueva-tarea">
       <input id="nuevaTarea" type="text" placeholder="nueva tarea">
       <button type="submit"><i class="fa-solid fa-pencil"></i> Crear tarea</button>
     </form>
 
-    <!-- contenedor vacío para las que pasen a pendientes -->
+    <!-- Pending tasks container -->
     <ul class="tareas-pendientes">
 
     </ul>
 
     <h2>Tareas finalizadas <span id="cantidad-finalizadas">0</span></h2>
-    <!-- contenedor vacío para las que pasen a terminadas -->
+    <!-- Finished tasks container -->
     <ul class="tareas-terminadas">
 
     </ul>
